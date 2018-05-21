@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css?family=Play');
+
+@font-face {
+    font-family: 'us_navyregular';
+    src: url('../fonts/usnavy-webfont.woff2') format('woff2'),
+         url('../fonts/usnavy-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #121111;
+    color: #FF1E1E;
+    display: flex;
+    font-family: 'Play', sans-serif;
+    height: 100vh;
+}
+
+.board {
+    background: repeating-radial-gradient(circle at center, rgba(89, 232, 49, 0.2),  
+                                                            rgba(89, 232, 49, 0.2) 1px, 
+                                                            transparent 1px, transparent 40px);
+    border-radius: 50%;
+    height: 500px;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+    width: 500px;
+}
+
+@keyframes sonar-rotate {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+@keyframes sonar-pulse {
+    from {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.board::before {
+    animation: sonar-rotate 10s linear, sonar-pulse 3s ease-in-out;
+    animation-iteration-count: infinite;
+    background: linear-gradient(45deg, #121111, rgba(89, 232, 49, 0.1), #121111),
+                radial-gradient(circle at top left, rgba(89, 232, 49, 0.1), transparent);
+    /* clip-path: polygon(50% 100%, 100% 50%, 0 0); */
+    content: "";
+    display: block;
+    height: 50%;
+    left: 50%;
+    position: absolute;
+    transform-origin: top left;
+    width: 50%;
+    top: 50%;
+}
+
+/* .board::after {
+    border: 1px solid #59e831;
+    clip-path: polygon(0 0, 0 10%, 10% 0, 90% 0, 100% 0, 100% 10%);
+    content: "";
+    display: block;
+    height: 100px;
+    left: calc(50% - 50px);
+    position: absolute;
+    top: calc(50% - 50px);
+    width: 100px;
+} */
+
+.board-grid {
+    border-collapse: collapse;
+    border-spacing: 0;
+    left: 70px;
+    position: absolute;
+    top: 109px;
+}
+
+.board-grid td:not(:first-child) {
+    border: 1px solid #302F2F;
+}
+
+.board-grid .board-numbers td {
+    border: none;
+}
+
+.board-grid td,
+.board-letters {
+    height: 40px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 40px;
+}
+
+.hit {
+    color: #59e831;
+    font: 12px 'us_navyregular', sans-serif;
+}
+
+.hit::after {
+    content: "I";
+}
+
+.miss {
+    color: #FF1E1E;
+    font-size: 12px;
+}
+
+.miss::after {
+    content: "Miss";
+}
+
+.shot-status-container {
+    align-items: center;
+    background-color: rgba(18, 17, 17, 0.7);
+    display: flex;
+    flex-flow: column nowrap;
+    font-size: 30px;
+    height: 100vh;
+    justify-content: center;
+    opacity: 0;
+    position: absolute;
+    transition: opacity .5s ease-in, visibility 0s linear .5s;
+    width: 100vw;
+    visibility: hidden;
+}
+
+.shot-status-container-visible {
+    opacity: 1;
+    transition-delay: 0s;
+    visibility: visible;
+}
+
+.btn-status-close {
+    display: none;
+}
+
+.guess-form {
+    align-items: center;
+    display: flex;
+    height: 100vh;
+    justify-content: space-between;
+    padding: 0 200px;
+    position: absolute;
+    width: 100vw;
+}
+
+.guess-form-field,
+.btn {
+    border: none;
+    outline: none;
+}
+
+.guess-form-field {
+    background: none;
+    /* border-bottom: 5px solid; */
+    color: inherit;
+    font-size: 140px;
+    text-transform: uppercase;
+}
+
+.btn {
+    background-color: #FF1E1E;
+    border-radius: 50%;
+    height: 100px;
+    text-transform: uppercase;
+    transition: box-shadow .3s ease;
+    width: 100px;
+}
+
+.btn:hover {
+    box-shadow: 0 0 28px 2px #FF1E1E;
+}
+
+.btn-guess-form {
+    font-size: 50px;
+}
+
+.btn-new-game {
+    font-size: 20px;
+}
